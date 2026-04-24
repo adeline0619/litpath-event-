@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LitPath AI — 베타 체험 이벤트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF6F0;
+    --warm: #F5EDE0;
+    --accent: #E8653A;
+    --accent2: #C84E25;
+    --dark: #1E1208;
+    --mid: #6B4C2A;
+    --muted: #A07850;
+    --green: #2D6A4F;
+    --card: #FFFFFF;
+    --border: #E8D8C4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Gowun Batang', serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 100%, #E8653A22 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, #C84E2515 0%, transparent 60%);
+  }
+
+  .hero-badge {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--accent);
+    background: #E8653A18;
+    border: 1px solid #E8653A30;
+    padding: 6px 16px;
+    border-radius: 99px;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff60;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(28px, 7vw, 52px);
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 24px;
+    max-width: 600px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero p {
+    font-size: clamp(15px, 3.5vw, 18px);
+    color: #ffffff80;
+    text-align: center;
+    line-height: 1.9;
+    max-width: 480px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 48px;
+  }
+
+  .hero-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-primary {
+    font-family: 'Outfit', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    padding: 18px 48px;
+    border-radius: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 8px 32px #E8653A40;
+    transition: transform .2s, box-shadow .2s;
+    animation: pulse-glow 2.5s ease-in-out infinite;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px #E8653A55;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 8px 32px #E8653A40; }
+    50% { box-shadow: 0 8px 48px #E8653A60; }
+  }
+
+  .hero-sub {
+    font-size: 13px;
+    color: #ffffff40;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* 대각선 구분선 */
+  .diagonal-divider {
+    height: 80px;
+    background: var(--cream);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    margin-top: -1px;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 64px 24px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  /* ── EVENT CARD ── */
+  .event-box {
+    background: var(--dark);
+    border-radius: 24px;
+    padding: 36px 28px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .event-box::before {
+    content: '☕';
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    font-size: 48px;
+    opacity: .15;
+  }
+
+  .event-box h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .event-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .event-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-text {
+    font-size: 15px;
+    color: #ffffff90;
+    line-height: 1.7;
+    padding-top: 3px;
+  }
+
+  .step-text strong {
+    color: #fff;
+  }
+
+  /* ── FEATURES ── */
+  .features-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  .feature-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: border-color .2s, transform .2s;
+  }
+
+  .feature-card:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #E8653A12;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .feature-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--dark);
+  }
+
+  .feature-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    word-break: keep-all;
+  }
+
+  /* ── PROFILE ── */
+  .profile-card {
+    background: linear-gradient(135deg, #2C1810, #4A2C1A);
+    border-radius: 24px;
+    padding: 32px 28px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .profile-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .profile-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .profile-title {
+    font-size: 13px;
+    color: #FFB88C;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    background: #ffffff15;
+    border: 1px solid #ffffff20;
+    padding: 3px 10px;
+    border-radius: 99px;
+  }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  .price-card {
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    position: relative;
+    background: var(--card);
+    transition: border-color .2s;
+  }
+
+  .price-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, #fff8f5, #fff);
+    box-shadow: 0 8px 32px #E8653A12;
+  }
+
+  .price-badge {
+    position: absolute;
+    top: -1px;
+    right: 16px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 0 0 8px 8px;
+    letter-spacing: .5px;
+  }
+
+  .price-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .price-original {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+
+  .price-early {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--dark);
+  }
+
+  .price-discount {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    background: #E8653A12;
+    padding: 2px 8px;
+    border-radius: 99px;
+  }
+
+  .price-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .price-features li {
+    font-size: 13px;
+    color: var(--mid);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .price-features li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ── CTA BOTTOM ── */
+  .cta-bottom {
+    background: var(--dark);
+    text-align: center;
+    padding: 80px 24px;
+  }
+
+  .cta-bottom h2 {
+    color: #fff;
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto 12px;
+  }
+
+  .cta-bottom p {
+    color: #ffffff60;
+    font-size: 15px;
+    margin-bottom: 36px;
+  }
+
+  .cta-note {
+    font-size: 13px;
+    color: #ffffff40;
+    margin-top: 16px;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #111;
+    text-align: center;
+    padding: 24px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    color: #ffffff30;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp .6s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: none; }
+  }
+
+  .fade-up:nth-child(1) { animation-delay: .1s; }
+  .fade-up:nth-child(2) { animation-delay: .2s; }
+  .fade-up:nth-child(3) { animation-delay: .3s; }
+  .fade-up:nth-child(4) { animation-delay: .4s; }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 99px;
+    margin-bottom: 28px;
+  }
+
+  .starbucks-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #E8653A12;
+    border: 1px solid #E8653A30;
+    border-radius: 12px;
+    padding: 10px 18px;
+    margin-bottom: 32px;
+    font-size: 15px;
+    color: var(--accent);
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">LITPATH AI</div>
+  <div class="hero-badge">🎉 베타 체험 이벤트</div>
+  <h1 class="fade-up">
+    아이의 영어 읽기 수준,<br><em>5분</em>이면 알 수 있어요
+  </h1>
+  <p class="fade-up">
+    22년 현장 경험 + Reading Horizons 기반 AI가<br>
+    파닉스·디코딩·유창성을 정밀 진단합니다
+  </p>
+  <div class="hero-cta fade-up">
+    <a href="https://litpath-ai.vercel.app" class="btn-primary" target="_blank">
+      무료 체험 시작하기 →
+    </a>
+    <span class="hero-sub">회원가입 후 무료 1회 · 3분 소요</span>
+  </div>
+</div>
+<div class="diagonal-divider"></div>
+
+<!-- EVENT -->
+<section>
+  <span class="section-label">EVENT</span>
+  <div class="section-divider"></div>
+
+  <div style="text-align:center; margin-bottom: 32px;">
+    <div class="starbucks-highlight">
+      ☕ 체험 후 피드백 → 스타벅스 아이스아메리카노 증정
+    </div>
+    <h2>이렇게 참여하세요</h2>
+  </div>
+
+  <div class="event-box">
+    <h3>STEP BY STEP</h3>
+    <div class="event-steps">
+      <div class="event-step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>무료 체험</strong><br>
+          litpath-ai.vercel.app 접속 → 회원가입 → 진단 시작<br>
+          실제 학원 학생이나 자녀분께 사용해 보세요
+        </div>
+      </div>
+      <div class="event-step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>피드백 제출</strong><br>
+          3분짜리 짧은 폼에 솔직한 의견을 남겨주세요<br>
+          좋은 점, 아쉬운 점 모두 환영합니다
+        </div>
+      </div>
+      <div class="event-step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>스벅 ☕ 수령</strong><br>
+          폼 제출 확인 후 24시간 이내<br>카카오톡으로 아이스아메리카노 보내드려요
+        </div>
+      </div>
+      <div class="event-step">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <strong>얼리버드 혜택 (선택)</strong><br>
+          정식 출시 전 체험자 전용 <strong style="color:var(--accent)">30% 할인가</strong>로<br>
+          정규 이용권 신청 가능
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section>
+  <span class="section-label">FEATURES</span>
+  <div class="section-divider"></div>
+  <h2>LitPath AI가 할 수 있는 것</h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <div>
+        <div class="feature-title">AI 읽기 진단</div>
+        <div class="feature-desc">파닉스·디코딩·유창성·이해력 4영역을 5분 안에 분석. 레벨 판정 + 맞춤 학습 경로 + PDF 리포트 제공</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧩</div>
+      <div>
+        <div class="feature-title">난독증 심층 스크리닝</div>
+        <div class="feature-desc">7개 하위 기술 영역(글자-소리 대응, 블렌딩, 세그멘팅, 인코딩, 시각 변별, RAN, 작업 기억) 개별 점수 분석</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎧</div>
+      <div>
+        <div class="feature-title">파닉스 레벨 테스트</div>
+        <div class="feature-desc">유치부·초등·중등 3단계. 🔊 소리를 듣고 답 고르기 — 객관적 음소 인식 평가</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎤</div>
+      <div>
+        <div class="feature-title">읽기 유창성 테스트</div>
+        <div class="feature-desc">아이가 단어·문장·문단을 소리 내어 읽으면 AI가 정확도를 분석. Whisper API 기반 음성 인식</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section>
+  <span class="section-label">ABOUT</span>
+  <div class="section-divider"></div>
+  <h2 style="margin-bottom:20px">만든 사람</h2>
+  <div class="profile-card">
+    <div class="profile-avatar">👩‍🏫</div>
+    <div>
+      <div class="profile-name">곽재연 원장</div>
+      <div class="profile-title">
+        애들린클래스 · Seongnam, Korea<br>
+        22년 영어 읽기 지도 경험<br>
+        약 1,000명 학생 지도
+      </div>
+      <div class="profile-tags">
+        <span class="tag">Reading Horizons Master Teacher</span>
+        <span class="tag">파닉스 전문</span>
+        <span class="tag">난독증 지도</span>
+        <span class="tag">구조적 문해 교육</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section>
+  <span class="section-label">EARLY BIRD PRICING</span>
+  <div class="section-divider"></div>
+  <h2>베타 체험자 전용 특가</h2>
+  <p style="color:var(--muted); font-size:14px; margin-bottom:24px; line-height:1.7; word-break:keep-all">
+    피드백을 주신 원장님들께만 드리는 얼리버드 가격이에요.<br>정식 출시 후에는 정가로만 운영됩니다.
+  </p>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">진단권 1회</div>
+      <div class="price-row">
+        <span class="price-original">19,000원</span>
+        <span class="price-early">13,000원</span>
+        <span class="price-discount">30% OFF</span>
+      </div>
+      <ul class="price-features">
+        <li>AI 읽기 진단 1회</li>
+        <li>맞춤 학습 경로 리포트</li>
+        <li>PDF 다운로드</li>
+      </ul>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-badge">추천</div>
+      <div class="price-name">3개월 이용권</div>
+      <div class="price-row">
+        <span class="price-original">39,000원</span>
+        <span class="price-early">27,000원</span>
+        <span class="price-discount">30% OFF</span>
+      </div>
+      <ul class="price-features">
+        <li>AI 읽기 진단 무제한</li>
+        <li>난독증 심층 스크리닝</li>
+        <li>파닉스·읽기 유창성 테스트</li>
+        <li>월별 성장 리포트 + PDF</li>
+      </ul>
+    </div>
+
+    <div class="price-card">
+      <div class="price-name">패밀리 올인원</div>
+      <div class="price-row">
+        <span class="price-original">59,000원</span>
+        <span class="price-early">41,000원</span>
+        <span class="price-discount">30% OFF</span>
+      </div>
+      <ul class="price-features">
+        <li>AI 진단 무제한</li>
+        <li>곽재연 원장 1:1 피드백 1회</li>
+        <li>월별 성장 리포트 + PDF</li>
+        <li>정식 출시 시 추가 혜택</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:16px; padding:16px; background:var(--warm); border-radius:12px; font-size:13px; color:var(--mid); line-height:1.7; text-align:center">
+    💳 결제: 카카오뱅크 3333-35-2816283 (예금주: 애들린클래스)<br>
+    📩 문의: adelinekwak@gmail.com
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<div class="cta-bottom">
+  <h2>지금 바로 체험해 보세요</h2>
+  <p>5분이면 충분해요 — 무료 1회 제공</p>
+  <a href="https://litpath-ai.vercel.app" class="btn-primary" target="_blank" style="display:inline-block">
+    무료 체험 시작하기 →
+  </a>
+  <div class="cta-note">회원가입 후 무료 진단 1회 · 별도 앱 설치 불필요</div>
+</div>
+
+<footer>
+  © 2026 LitPath AI · 애들린클래스 · 곽재연 원장<br>
+  adelinekwak@gmail.com · litpath-ai.vercel.app
+</footer>
+
+</body>
+</html>
